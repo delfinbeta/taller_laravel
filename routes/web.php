@@ -6,6 +6,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/pagina1', function () {
+    return view('pagina1');
+})->name('page1');
+
+Route::get('/pagina2', function () {
+    return view('pagina2');
+})->name('page2');
+
+Route::get('/pagina3', function () {
+    return view('pagina3');
+})->name('page3');
+
 Route::get('/hola', function () {
     return view('hola');
 });

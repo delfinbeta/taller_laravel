@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saludo</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saludo</title>
+  <!-- Scripts -->
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+  <!-- Styles -->
+  @livewireStyles
 </head>
 <body>
+  @include('layouts.header')
+
+  <main>
     <h1>Admin Saludo</h1>
 
     <h2>Condicional IF</h2>
@@ -106,5 +114,10 @@
             $j++;
         @endphp
     @endwhile
+  </main>
+  
+  @include('layouts.footer')
+
+  @livewireScripts
 </body>
 </html>
