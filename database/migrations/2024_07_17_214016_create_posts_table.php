@@ -20,7 +20,7 @@ return new class extends Migration
 
             $table->string('title');
             $table->text('content');
-            $table->integer('points');
+            $table->integer('points')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
