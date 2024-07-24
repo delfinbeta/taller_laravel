@@ -2,32 +2,56 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Models\Category;
+use App\Models\Post;
+use App\Models\User;
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/pagina1', function () {
-    return view('pagina1');
-})->name('page1');
+Route::get('/users', function () {
+    $users = User::all();
 
-Route::get('/pagina2', function () {
-    return view('pagina2');
-})->name('page2');
+    return view('users')->with('users', $users);
+})->name('users');
 
-Route::get('/pagina3', function () {
-    return view('pagina3');
-})->name('page3');
+Route::get('/categories', function () {
+    $categories = Category::all();
 
-Route::get('/hola', function () {
-    return view('hola');
-});
+    return view('categories')->with('categories', $categories);
+})->name('categories');
 
-Route::get('/saludo/{name}', function (string $name) {
-    $data = ['name' => $name, 'age' => 38, 'date' => date('d/m/Y')];
-    $data2 = ['A', 'B', 'C'];
+Route::get('/posts', function () {
+    $posts = Post::all();
+    // $posts = Post::where('points', 5)->get();
+    // SELECT * FROM posts WHERE points=5;
 
-    return view('admin.saludo')->with('name', $name)->with('age', 10)->with('data', $data)->with('data2', $data2);
-});
+    $destacados = Post::where('points', 5)->count();
+    $total = Post::count();
+
+    $max = Post::max('points');
+    $min = Post::min('points');
+    $avg = Post::avg('points');
+    $sum = Post::sum('points');
+
+    return view('posts')->with('posts', $posts)
+                        ->with('destacados', $destacados)
+                        ->with('total', $total)
+                        ->with('max', $max)
+                        ->with('min', $min)
+                        ->with('avg', $avg)
+                        ->with('sum', $sum);
+})->name('posts');
+
+Route::get('/posts/{id}/show', function (int $id) {
+    $post = Post::findOrFail($id);
+    // $post = Post::where('id', $id)->first();
+    // $post = Post::where('points', 5)->first();
+    // $post = Post::firstWhere('points', 5);
+
+    return view('post_show')->with('post', $post);
+})->name('posts.show');
 
 Route::middleware([
     'auth:sanctum',
