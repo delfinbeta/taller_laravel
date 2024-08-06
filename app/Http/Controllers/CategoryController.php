@@ -49,7 +49,7 @@ class CategoryController extends Controller
    */
   public function show(Category $category)
   {
-    //
+    return view('admin.categories.show')->with('category', $category);
   }
 
   /**
@@ -57,7 +57,7 @@ class CategoryController extends Controller
    */
   public function edit(Category $category)
   {
-      //
+    return view('admin.categories.edit')->with('category', $category);
   }
 
   /**
@@ -65,10 +65,16 @@ class CategoryController extends Controller
    */
   public function update(Request $request, Category $category)
   {
-    // $category7 = Category::findOrFail(7);
-    // $category7->name = 'Películas';
-    // $category7->save();
-    // $category7->update(['name' => 'Películas Editado']);
+    // $category->name = $request->name;
+    // $category->description = $request->description;
+    // $category->save();
+
+    $category->update([
+      'name' => $request->name,
+      'description' => $request->description
+    ]);
+
+    return redirect()->route('categories.index');
   }
 
   /**
@@ -76,9 +82,10 @@ class CategoryController extends Controller
    */
   public function destroy(Category $category)
   {
-    // $category6 = Category::findOrFail(6);
-    // $category6->delete();
+    $category->delete();
 
     // Category::destroy(5);
+
+    return redirect()->route('categories.index');
   }
 }

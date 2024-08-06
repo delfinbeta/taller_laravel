@@ -10,8 +10,10 @@
 <body>
   @include('layouts.header')
 
-  <main>
-    @yield('content')
+  <main class="p-4">
+    <div class="container mx-auto p-4">
+      @yield('content')
+    </div>
   </main>
   
   @include('layouts.footer')

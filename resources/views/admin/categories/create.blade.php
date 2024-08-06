@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-  <h2>Crear Categoría</h2>
+  <h2 class="font-bold text-xl">Crear Categoría</h2>
 
   <form action="{{ route('categories.store') }}" method="post">
     @csrf
