@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PostController;
 
-use App\Models\Post;
 use App\Models\User;
 
 Route::get('/', function () {
@@ -17,9 +17,7 @@ Route::get('/users', function () {
     return view('users')->with('users', $users);
 })->name('users');
 
-Route::resource('categories', CategoryController::class);
-
-Route::get('/posts', function () {
+/*Route::get('/posts', function () {
     // Post::where('points', 5)->update(['title' => 'DESTACADO']);
 
     // Post::where('points', 5)->delete();
@@ -54,7 +52,7 @@ Route::get('/posts/{id}/show', function (int $id) {
     // $post = Post::firstWhere('points', 5);
 
     return view('post_show')->with('post', $post);
-})->name('posts.show');
+})->name('posts.show');*/
 
 Route::middleware([
     'auth:sanctum',
@@ -64,4 +62,7 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::resource('categories', CategoryController::class);
+    Route::resource('posts', PostController::class);
 });

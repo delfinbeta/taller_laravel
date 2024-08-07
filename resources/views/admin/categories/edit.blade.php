@@ -7,6 +7,16 @@
 @section('content')
   <h2 class="font-bold text-xl">Editar Categoría</h2>
 
+  @if ($errors->any())
+    <div class="p-4 font-medium text-sm bg-red-300 text-red-600">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+  @endif
+
   <form action="{{ route('categories.update', $category) }}" method="post">
     @csrf
     @method('PUT')

@@ -36,9 +36,14 @@ class CategoryController extends Controller
 
     // $category = Category::create(['name' => $request->name]);
 
+    $data = $request->validate([
+      'name' => 'required|string|unique:categories',
+      'description' => 'nullable|string',
+    ]);
+
     $category = Category::create([
-      'name' => $request->name,
-      'description' => $request->description,
+      'name' => $data['name'],
+      'description' => $data['description'],
     ]);
 
     return redirect()->route('categories.index');
@@ -69,9 +74,14 @@ class CategoryController extends Controller
     // $category->description = $request->description;
     // $category->save();
 
+    $data = $request->validate([
+      'name' => 'required|string|unique:categories',
+      'description' => 'nullable|string',
+    ]);
+
     $category->update([
-      'name' => $request->name,
-      'description' => $request->description
+      'name' => $data['name'],
+      'description' => $data['description']
     ]);
 
     return redirect()->route('categories.index');
