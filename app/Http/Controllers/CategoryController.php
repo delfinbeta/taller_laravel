@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Categories\StoreCategoryRequest;
+use App\Http\Requests\Categories\UpdateCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -28,7 +30,7 @@ class CategoryController extends Controller
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request)
+  public function store(StoreCategoryRequest $request)
   {
     // $category_new = new Category();
     // $category_new->name = $request->name;
@@ -36,10 +38,11 @@ class CategoryController extends Controller
 
     // $category = Category::create(['name' => $request->name]);
 
-    $data = $request->validate([
-      'name' => 'required|string|unique:categories',
-      'description' => 'nullable|string',
-    ]);
+    // $data = $request->validate([
+    //   'name' => 'required|string|unique:categories',
+    //   'description' => 'nullable|string',
+    // ]);
+    $data = $request->validated();
 
     $category = Category::create([
       'name' => $data['name'],
@@ -68,16 +71,17 @@ class CategoryController extends Controller
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, Category $category)
+  public function update(UpdateCategoryRequest $request, Category $category)
   {
     // $category->name = $request->name;
     // $category->description = $request->description;
     // $category->save();
 
-    $data = $request->validate([
-      'name' => 'required|string|unique:categories',
-      'description' => 'nullable|string',
-    ]);
+    // $data = $request->validate([
+    //   'name' => 'required|string|unique:categories',
+    //   'description' => 'nullable|string',
+    // ]);
+    $data = $request->validated();
 
     $category->update([
       'name' => $data['name'],
