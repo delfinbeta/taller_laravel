@@ -36,7 +36,7 @@ class Category extends Model
    *
    * @var array
    */
-  protected $fillable = ['name', 'description'];
+  protected $fillable = ['name', 'description', 'image'];
 
   /**
    * Get the posts for the category.

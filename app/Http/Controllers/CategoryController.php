@@ -6,6 +6,7 @@ use App\Http\Requests\Categories\StoreCategoryRequest;
 use App\Http\Requests\Categories\UpdateCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -44,9 +45,21 @@ class CategoryController extends Controller
     // ]);
     $data = $request->validated();
 
+    if($request->hasFile('image')) {
+      $fileImage = $request->file('image');
+      $path = $fileImage->path();
+      $extension = $fileImage->extension();
+      $imageName = $fileImage->getClientOriginalName();
+
+      Storage::putFileAs('categories', $fileImage, $imageName);
+    } else {
+      $imageName = null;
+    }
+
     $category = Category::create([
       'name' => $data['name'],
       'description' => $data['description'],
+      'image' => $imageName,
     ]);
 
     return redirect()->route('categories.index');
@@ -83,9 +96,21 @@ class CategoryController extends Controller
     // ]);
     $data = $request->validated();
 
+    if($request->hasFile('image')) {
+      $fileImage = $request->file('image');
+      $path = $fileImage->path();
+      $extension = $fileImage->extension();
+      $imageName = $fileImage->getClientOriginalName();
+
+      Storage::putFileAs('categories', $fileImage, $imageName);
+    } else {
+      $imageName = $category->image;
+    }
+
     $category->update([
       'name' => $data['name'],
-      'description' => $data['description']
+      'description' => $data['description'],
+      'image' => $imageName
     ]);
 
     return redirect()->route('categories.index');

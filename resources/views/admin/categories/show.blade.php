@@ -17,4 +17,7 @@
       <li>- {{ $post->title }}</li>
     @endforeach
   </ul>
+  @if ($category->image)
+  <img src="{{ asset('storage/categories/'.$category->image) }}" alt="Imagen" title="Imagen" width="200" />
+  @endif
 @endsection
