@@ -10,6 +10,6 @@
   <p>Título: {{ $post->title }}</p>
   <p>Contenido: {{ $post->content }}</p>
   <p>Puntos: {{ $post->points }}</p>
-  <p>Categoría: {{ $category->name }}</p>
+  <p>Categoría: {{ $post->category->name }}</p>
   <p>Fecha de creación: {{ optional($post->created_at)->format('d/m/Y') }}</p>
 @endsection

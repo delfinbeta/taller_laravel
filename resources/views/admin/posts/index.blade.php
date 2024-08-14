@@ -19,6 +19,7 @@
       <tr class="bg-blue-300">
         <th class="border border-gray-300 px-4 py-2" style="width: 150px;">ID</th>
         <th class="border border-gray-300 px-4 py-2">Título</th>
+        <th class="border border-gray-300 px-4 py-2">Categoría</th>
         <th class="border border-gray-300 px-4 py-2" style="width: 150px;">Puntos</th>
         <th class="border border-gray-300 px-4 py-2" style="width: 300px;">Acciones</th>
       </tr>
@@ -32,6 +33,7 @@
             </a>
           </td>
           <td class="border border-gray-300 px-4 py-2">{{ $post->title }}</td>
+          <td class="border border-gray-300 px-4 py-2">{{ $post->category->name }}</td>
           <td class="border border-gray-300 px-4 py-2 text-center">{{ $post->points }}</td>
           <td class="border border-gray-300 px-4 py-2 text-center">
             <a href="{{ route('posts.edit', $post) }}" class="mx-4 p-2 rounded-md bg-blue-400 hover:bg-blue-600 text-white">Editar</a>
